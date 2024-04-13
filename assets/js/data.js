@@ -1,6 +1,5 @@
 let data = (()=>{
     try {
-        console.log('hola')
         const url = "http://localhost:5501/vocales.json";
         const getData = async () => {
             const response = await fetch(url);

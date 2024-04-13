@@ -1,4 +1,4 @@
-import Tipos from "./clases/Tipos.js";
+import {A, E, I, O, U} from "./clases/Tipos.js";
 import data from "./data.js";
 
 let vocales = [];
@@ -34,8 +34,18 @@ const cardCreate = () => {
 
 window.playSound = (sonido) => {
     try {
-        let musica = new Audio(`./assets/sounds/${sonido}`);
-        musica.play();
+        const vocal = vocales.find((item)=>{
+            return item.sonido === sonido;
+        })
+        sonido == 'A.mp3' ? vocal.cantoA()
+        : sonido == 'E.mp3' ? vocal.cantoE()
+        : sonido == 'I.mp3' ? vocal.cantoI()
+        : sonido == 'O.mp3' ? vocal.cantoO()
+        : sonido == 'U.mp3' ? vocal.cantoU()
+        : undefined;
+
+        /* let musica = new Audio(`./assets/sounds/${sonido}`);
+        musica.play(); */
     } catch (error) {
         console.log(error);
     }
@@ -89,7 +99,20 @@ document.getElementById('btnRegistrar').addEventListener('click', () =>{
         const rango = document.getElementById('rango').value;
         const comentario = document.getElementById('comentarios').value;
         if(nombre && rango && comentario){
-            let vocal = new Tipos(nombre, rango, comentario, imagenSrc, sonidoOrg);
+            let vocal = nombre == 'A' ? new A(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            : nombre == 'E' ? new E(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            : nombre == 'I' ? new I(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            : nombre == 'O' ? new O(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            : nombre == 'U' ? new U(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            :undefined;
+
+            /* let voca;
+            if(nombre == 'A'){
+                voca = new A(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            }else if (nombre == 'E'){
+                voca = new E(nombre, rango, comentario, imagenSrc, sonidoOrg)
+            } */
+
             vocales.push(vocal);
             cardCreate();
         } else{
